@@ -4,7 +4,7 @@ import React from 'react'
 const Setting = () => {
   return (
     <View>
-      <Text></Text>
+      <Text>Go and sleep befor</Text>
     </View>
   )
 }

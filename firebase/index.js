@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { API_KEY,AUTH_DOMAIN,PROJECT_ID,STORAGE_BUCKET,MESSAGING_SENDER_ID ,APP_ID} from '@env';
 
 import { getFirestore, collection, addDoc, updateDoc, doc} from "firebase/firestore";
 
@@ -10,13 +11,13 @@ import { getFirestore, collection, addDoc, updateDoc, doc} from "firebase/firest
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCsHX8BbuEAPIy7QJvM1DcXG6E-Rs8AuEs",
-  authDomain: "biometric-fingerprint-data.firebaseapp.com",
-  projectId: "biometric-fingerprint-data",
-  storageBucket: "biometric-fingerprint-data.appspot.com",
-  messagingSenderId: "599014374886",
-  appId: "1:599014374886:web:ae2e5516cd570654fa2a27",
-  measurementId: "G-9HWMBGDJY7"
+  apiKey: API_KEY,
+  authDomain: AUTH_DOMAIN,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDER_ID,
+  appId: APP_ID,
+  measurementId: MEASUREMENT_ID,
 };
 
 // Initialize Firebase
