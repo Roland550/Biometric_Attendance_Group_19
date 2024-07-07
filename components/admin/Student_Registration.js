@@ -7,7 +7,8 @@ import {
   Image,
   Button,
   Pressable,
-  Alert
+  Alert,
+  ScrollView
 } from "react-native";
 import React from "react";
 import styles from "./styles";
@@ -16,11 +17,15 @@ import * as LocalAuthentication from "expo-local-authentication";
 import {
   app,
   db,
-  getFirestore,
+ 
+} from "../../firebase/index";
+import { getFirestore,
   collection,
   addDoc,
-  updateDoc, doc
-} from "../../firebase/index";
+  getDocs,
+  updateDoc,
+  doc, } from "firebase/firestore";
+  import Toast from "react-native-toast-message";
 
 const Student_Registration = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -28,15 +33,21 @@ const Student_Registration = ({ navigation }) => {
   const [department, setDepartement] = useState("");
   const [level, setLevel] = useState("");
   const [fingerprintData, setFingerprintData] = useState(null);
+  const db = getFirestore();
 
   const handleRegister = async () => {
     if (!name || !matricule || !department || !level) {
-      Alert.alert('All fields are required');
+      Toast.show({
+        type: 'error',
+        text1: 'Oops❌!!',
+        text2: 'Fill all the requirements please',
+        visibilityTime: 5000,
+      })
       return;
     }
 
     try {
-      const db = getFirestore();
+     
       const docRef = await addDoc(collection(db, "students"), {
         name: name,
         matricule: matricule,
@@ -46,7 +57,13 @@ const Student_Registration = ({ navigation }) => {
       });
 
       console.log("Document written with ID: ", docRef.id);
-      Alert.alert('Student details saved. Now scan your fingerprints.');
+      // Alert.alert('Student details saved. Now scan your fingerprints.');
+      Toast.show({
+        type: 'success',
+        text1: 'Well!!',
+        text2: 'Student details saved. Now scan your fingerprints.',
+        visibilityTime: 5000,
+      })
 
       let scanning = true;
       const collectedFingerprints = [];
@@ -61,19 +78,26 @@ const Student_Registration = ({ navigation }) => {
           setFingerprintData(collectedFingerprints);
 
           const addMore = await new Promise((resolve) => {
-            Alert.alert(
-              'Fingerprint saved successfully!',
-              'Do you want to add another fingerprint?',
-              [
-                { text: 'Yes', onPress: () => resolve(true) },
-                { text: 'No', onPress: () => resolve(false) }
-              ]
-            );
+            // Alert.alert(
+            //   'Fingerprint saved successfully!'
+            // );
+            Toast.show({
+              type: 'success',
+              text1: 'Good!!',
+              text2: 'Fingerprint saved successfully',
+              visibilityTime: 5000,
+            })
           });
 
           scanning = addMore;
         } else {
-          Alert.alert('Fingerprint scanning failed');
+          // Alert.alert('Fingerprint scanning failed');
+          Toast.show({
+            type: 'error',
+            text1: 'Oopps❌!!',
+            text2: 'Fingerprint scanning failed',
+            visibilityTime: 5000,
+          })
           scanning = false;
         }
       }
@@ -84,8 +108,8 @@ const Student_Registration = ({ navigation }) => {
         });
 
         console.log("Fingerprint data updated for document ID: ", docRef.id);
-        Alert.alert('All fingerprints saved successfully!');
-        // navigation.navigate('StudentList'); // Ensure you have a StudentList screen in your navigation stack
+        // Alert.alert('All fingerprints saved successfully!');
+        navigation.navigate('Registration list'); 
       }
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -93,7 +117,12 @@ const Student_Registration = ({ navigation }) => {
     }
   };
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView 
+    contentContainerStyle={{ flexGrow: 1 }}
+      showsVerticalScrollIndicator={false}
+      keyboardShouldPersistTaps={"always"}
+      style={{ backgroundColor: "white" }}
+    >
       {/* <View style={styles.header} >
      <Text style={styles.title}>Student registration</Text>
      </View> */}
@@ -138,7 +167,7 @@ const Student_Registration = ({ navigation }) => {
       <Pressable style={styles.next_btn} onPress={handleRegister}>
         <Text style={styles.btn_text}>Register</Text>
       </Pressable>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 

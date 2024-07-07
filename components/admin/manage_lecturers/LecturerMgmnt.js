@@ -17,7 +17,7 @@ const LecturerMgmnt = ({navigation}) => {
       <Text style={styles.subText}>Click on <Text style={styles.Textanchor} >Register</Text> to register students</Text>
      </View>
     </View>
-    <Pressable style={styles.next_btn}  onPress={() =>{navigation.navigate('Register Lecturer')}}>
+    <Pressable style={styles.next_btn}  onPress={() =>{navigation.navigate('Lecturer List')}}>
      <Text style={styles.btn_text}>Register</Text>
    </Pressable>
   </SafeAreaView>

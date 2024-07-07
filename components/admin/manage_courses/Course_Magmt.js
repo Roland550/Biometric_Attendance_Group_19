@@ -17,7 +17,7 @@ const Course_Magmt = ({navigation}) => {
       <Text style={styles.subText}>Click on <Text style={styles.Textanchor} >Register</Text> to register students</Text>
      </View>
     </View>
-    <Pressable style={styles.next_btn}  onPress={() =>{navigation.navigate('Course Registration')}}>
+    <Pressable style={styles.next_btn}  onPress={() =>{navigation.navigate('Course Registation')}}>
      <Text style={styles.btn_text}>Register</Text>
    </Pressable>
   </SafeAreaView>

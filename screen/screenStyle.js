@@ -126,6 +126,16 @@ const Screenstyles = StyleSheet.create({
         alignSelf: 'center',
         
        },
+       inputText:{
+        width: isTablet? 730 : 350,
+        height: 50,
+        backgroundColor: colors.background,
+        borderRadius: 20,
+        elevation: 1,
+        alignSelf: 'center',
+        paddingLeft: isTablet? 20 : 15,
+        marginBottom: 10,
+      },
 
 })
 

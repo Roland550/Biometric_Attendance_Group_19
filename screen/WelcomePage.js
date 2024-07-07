@@ -5,8 +5,8 @@ import React, { useEffect } from 'react'
 const WelcomePage = ({navigation}) => {
   useEffect(() =>{
     const timer = setTimeout(() =>{
-      navigation.replace('Login As')
-    }, 2000)
+      navigation.replace('Signup00')
+    }, 10000)
     return () => clearTimeout(timer);
   }, [navigation])
   return (
